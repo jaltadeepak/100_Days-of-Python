@@ -37,6 +37,7 @@ resources = {
 }
 
 def checkIngredients(typeofCoffee):
+    """returns the ingredient that is not enough or none if all are enough"""
     if resources["water"] >= MENU[typeofCoffee]["ingredients"]["water"] and resources["milk"] >= MENU[typeofCoffee]["ingredients"]["milk"] and resources["coffee"] >= MENU[typeofCoffee]["ingredients"]["coffee"]:
         return "none"
     elif resources["water"] < MENU[typeofCoffee]["ingredients"]["water"]:
@@ -48,6 +49,8 @@ def checkIngredients(typeofCoffee):
 
 
 def takeMoney(typeofCoffee):
+    """takes user money and calculates amount to return and returns True if money is enough and False if money put in is not enough"""
+    print("Please insert coins.")
     quarters = int(input("How many quarters? "))
     dimes = int(input("How many dimes? "))
     nickels = int(input("How many nickels? "))
@@ -57,40 +60,46 @@ def takeMoney(typeofCoffee):
     money_given_back = round(money_put_in - MENU [typeofCoffee]["cost"], 2)
     # print(money_given_back)
     if money_given_back >= 0:
-            global resources
-            resources["money"] += MENU[typeofCoffee]["cost"]
-            print(f"Coffee Served. Change returned is ${money_given_back}.")
+        global resources
+        resources["money"] += MENU[typeofCoffee]["cost"]
+        print(f"Coffee Served{coffee_logo}. Change returned is ${money_given_back}.")
+        return True
     else:
         print("Not enough money put in. Refunded.")
-    return money_given_back
+        return False
 
 def makeCoffee(typeofCoffee):
+    """makes changes in the resources dictionary after the coffee is made"""
     global resources
     resources["water"] -= MENU[typeofCoffee]["ingredients"]["water"]
     resources["milk"] -= MENU[typeofCoffee]["ingredients"]["milk"]
     resources["coffee"] -= MENU[typeofCoffee]["ingredients"]["coffee"]
 
 def checkResources(typeofCoffee):
+    """checks if Resources dictionary has enough ingredients and makes coffee(makeCoffee function) if it does"""
     item_not_enough = checkIngredients(typeofCoffee)
     if item_not_enough == "none":
-        takeMoney(typeofCoffee)
-        makeCoffee(typeofCoffee)
+        enough_money = takeMoney(typeofCoffee)
+        if enough_money == True:
+            makeCoffee(typeofCoffee)
 
     elif item_not_enough in ["water", "milk", "coffee"]:
         print(f"Machine does not have enough {item_not_enough}.")
 
 def printReport():
+    """prints the amount of resources left"""
     print(f"Water: {resources['water']}ml")
     print(f"Milk: {resources['milk']}ml")
     print(f"Coffee: {resources['coffee']}g")
     print(f"Money: ${resources['money']}")
 
 def useMachine():
+    """runs the machine functionality"""
     command = input("\nWhat would you like? (espresso/latte/cappuccino): ")
 
     if command  == "off":
         return False
-    elif command in ["espresso", "latte", "cappucino"]:
+    elif command in ["espresso", "latte", "cappuccino"]:
         checkResources(command)
     elif command == "report":
         printReport()
