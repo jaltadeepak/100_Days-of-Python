@@ -1,5 +1,5 @@
 # Classes:
-# name is usually with first letter of every word capitalized to differentiate from functions etc
+# name is usually with first letter of every word capitalized to differentiate from functions etc (Pascal Case)
 # objectofclass = ClassName()
 # print(objectofclass) => prints <module.ClassName object at 0x23423423>
 
