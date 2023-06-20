@@ -25,7 +25,7 @@ timmy.goto(-200, -200)       #move the turtle to a location
 timmy.showturtle()           #make the turtle visible
 timmy.pendown()
 
-timmy.speed("fastest")
+timmy.speed("fast")
 timmy.hideturtle()
 
 for _ in range(10):
