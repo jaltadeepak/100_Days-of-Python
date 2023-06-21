@@ -29,7 +29,7 @@ screen.onkeypress(lambda: paddle.moverigpad("Down"), "Down")
 game_is_on = True
 while game_is_on:
     screen.update()
-    time.sleep(0.1)
+    time.sleep(ball.ballspeed)
     ball.move_ball(paddle.lefpad.position(), paddle.rigpad.position())
     checkreset = ball.outofbounds() 
     if checkreset != None:
