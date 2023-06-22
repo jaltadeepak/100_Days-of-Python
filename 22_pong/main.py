@@ -30,7 +30,9 @@ game_is_on = True
 while game_is_on:
     screen.update()
     time.sleep(ball.ballspeed)
+    
     ball.move_ball(paddle.lefpad.position(), paddle.rigpad.position())
+
     checkreset = ball.outofbounds() 
     if checkreset != None:
         scoreboard.update(checkreset)
