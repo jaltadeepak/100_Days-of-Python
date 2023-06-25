@@ -12,8 +12,6 @@ screen.addshape(image)
 turtle = Turtle()
 turtle.shape(image)
 
-screen.screensize(turtle.width, turtle.height)
-
 writer = Turtle()
 writer.hideturtle()
 writer.penup()
